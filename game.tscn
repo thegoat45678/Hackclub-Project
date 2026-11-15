@@ -1,0 +1,170 @@
+[gd_scene format=3 uid="uid://bjbbt2mibedfh"]
+
+[ext_resource type="Script" uid="uid://hfeuafdkt66k" path="res://character_body_2d.gd" id="1_feb5d"]
+[ext_resource type="Texture2D" uid="uid://c8yeu6n5h3rxq" path="res://playerv2.png" id="2_feb5d"]
+[ext_resource type="Texture2D" uid="uid://clcl284six03x" path="res://pixil-frame-0.png" id="3_feb5d"]
+[ext_resource type="Script" uid="uid://e5gykhoghex2" path="res://sword.gd" id="3_vef74"]
+[ext_resource type="Texture2D" uid="uid://32xp1sn17gvk" path="res://pixil-frame-0 (3) (1).png" id="4_7jktm"]
+[ext_resource type="Script" uid="uid://dtu5q72d2mgpv" path="res://monster.gd" id="4_ryrav"]
+[ext_resource type="Texture2D" uid="uid://bbigx1d0y8cf3" path="res://pixil-frame-0 (4).png" id="5_ryrav"]
+[ext_resource type="Texture2D" uid="uid://cc8ja8ohxtb84" path="res://pixil-frame-0(3).png" id="7_j5wjh"]
+[ext_resource type="Texture2D" uid="uid://dqtousbsd3rj5" path="res://pixil-frame-0(4).png" id="8_vef74"]
+[ext_resource type="Texture2D" uid="uid://ci1yucvpo44t3" path="res://pixil-frame-0 (1).png" id="10_hve3p"]
+[ext_resource type="Texture2D" uid="uid://bsf7twasw36r" path="res://pixil-frame-0 (2).png" id="11_mfdv2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8y8jq"]
+size = Vector2(4.9871216, 67.12625)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kgyoi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_j5wjh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_vef74")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vef74"]
+size = Vector2(38, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wunbd"]
+size = Vector2(501, 111)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wunbd"]
+animations = [{
+"frames": [{
+"duration": 1.5,
+"texture": ExtResource("4_7jktm")
+}, {
+"duration": 1.5,
+"texture": ExtResource("5_ryrav")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wunbd"]
+radius = 28.42534
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kgyoi"]
+radius = 21.023796
+
+[node name="Node2D" type="Node2D" unique_id=706319237]
+position = Vector2(-288, -308)
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1379327704 groups=["player"]]
+position = Vector2(-2, 97)
+script = ExtResource("1_feb5d")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1953194211]
+position = Vector2(352.62653, 720.6265)
+rotation = -0.012610539
+texture = ExtResource("2_feb5d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=964573401]
+position = Vector2(348, 706)
+rotation = 4.0500425e-05
+scale = Vector2(5.213393, 1)
+shape = SubResource("RectangleShape2D_8y8jq")
+
+[node name="Sword" type="CharacterBody2D" parent="Player" unique_id=974458138]
+position = Vector2(27, -64)
+script = ExtResource("3_vef74")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player/Sword" unique_id=1591285859]
+position = Vector2(354, 765)
+sprite_frames = SubResource("SpriteFrames_kgyoi")
+
+[node name="Area2D" type="Area2D" parent="Player/Sword" unique_id=1144180451]
+position = Vector2(343, 773)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Sword/Area2D" unique_id=595818924]
+position = Vector2(17, -3)
+shape = SubResource("RectangleShape2D_vef74")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1724273706]
+collision_mask = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=1908344403]
+position = Vector2(543, 710)
+texture = ExtResource("3_feb5d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=271321204]
+position = Vector2(541, 902)
+shape = SubResource("RectangleShape2D_wunbd")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="StaticBody2D" unique_id=875611738]
+position = Vector2(500, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/StaticBody2D" unique_id=890833558]
+position = Vector2(539, 710)
+texture = ExtResource("3_feb5d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/StaticBody2D" unique_id=842760139]
+position = Vector2(538, 904)
+shape = SubResource("RectangleShape2D_wunbd")
+
+[node name="Monster" type="CharacterBody2D" parent="." unique_id=286020990 groups=["Monster", "enemy"]]
+collision_layer = 3
+script = ExtResource("4_ryrav")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Monster" unique_id=557915504 groups=["enemy"]]
+position = Vector2(729, 826)
+sprite_frames = SubResource("SpriteFrames_wunbd")
+autoplay = "default"
+frame_progress = 0.47838044
+
+[node name="Area2D" type="Area2D" parent="Monster" unique_id=768516357 groups=["Monster"]]
+position = Vector2(721.6265, 808.6265)
+
+[node name="Hitbox" type="CollisionShape2D" parent="Monster/Area2D" unique_id=1861816881 groups=["Monster"]]
+shape = SubResource("CircleShape2D_wunbd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Monster" unique_id=1210145337 groups=["Monster"]]
+position = Vector2(721, 809)
+shape = SubResource("CircleShape2D_kgyoi")
+
+[node name="Monster2" type="CharacterBody2D" parent="." unique_id=914560698 groups=["Monster", "enemy"]]
+position = Vector2(108, 0)
+collision_layer = 3
+script = ExtResource("4_ryrav")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Monster2" unique_id=1929498615 groups=["enemy"]]
+position = Vector2(729, 826)
+sprite_frames = SubResource("SpriteFrames_wunbd")
+autoplay = "default"
+frame_progress = 0.3141157
+
+[node name="Area2D" type="Area2D" parent="Monster2" unique_id=961759439 groups=["Monster"]]
+position = Vector2(721.6265, 808.6265)
+
+[node name="Hitbox" type="CollisionShape2D" parent="Monster2/Area2D" unique_id=1956936987 groups=["Monster"]]
+shape = SubResource("CircleShape2D_wunbd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Monster2" unique_id=2047525203 groups=["Monster"]]
+position = Vector2(721, 809)
+shape = SubResource("CircleShape2D_kgyoi")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1230632450]
+
+[node name="PixilFrame0(1)" type="Sprite2D" parent="." unique_id=1746530874]
+light_mask = 524288
+visibility_layer = 524288
+z_index = -1
+position = Vector2(867.99994, 636)
+scale = Vector2(5.7659373, 3.2259376)
+texture = ExtResource("10_hve3p")
+
+[node name="PixilFrame0(2)" type="Sprite2D" parent="." unique_id=958462838]
+position = Vector2(1362.0001, 899)
+scale = Vector2(1.45, 1.24)
+texture = ExtResource("11_mfdv2")
+
+[connection signal="body_entered" from="Player/Sword/Area2D" to="Player" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Monster/Area2D" to="Player" method="_on_area_2d_body_entered"]
